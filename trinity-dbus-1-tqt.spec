@@ -84,7 +84,7 @@ See the dbus description for more information about D-BUS in general.
 Summary:		Dbus bindings for the Trinity Qt [TQt] interface (Development Files)
 Group:			Development/Libraries/C and C++
 
-Requires:		%{libname}0 = %{?epoch:%{epoch}:}%{version}-%{release}
+Requires:		%{libname}0 = %{EVRD}
 
 Requires:	dbus-devel
 
