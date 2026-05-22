@@ -1,8 +1,4 @@
 # TDE variables
-%if "%{?tde_version}" == ""
-%define tde_version 14.1.5
-%endif
-
 %define tde_pkg dbus-1-tqt
 
 %define libname %mklibname %{tde_pkg}
@@ -13,20 +9,20 @@
 %define _disable_rebuild_configure 1
 
 # fixes error: Empty %files file …/debugsourcefiles.list
-%define _debugsource_template %{nil}
+%undefine _debugsource_template
 
 %define tarball_name %{tde_pkg}-trinity
 
 Name:		trinity-%{tde_pkg}
-Version:	0.9
-Release:	%{?tde_version:%{tde_version}_}5
+Version:	14.1.6
+Release:	1
 Summary:	Dbus bindings for the Trinity Qt [TQt] interface
 Group:		System/Libraries
 URL:		http://www.trinitydesktop.org/
 
 License:	GPLv2+
 
-Source0:	https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/dependencies/%{tarball_name}-%{tde_version}.tar.xz
+Source0:	https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{version}/main/dependencies/%{tarball_name}-%{version}.tar.xz
 
 BuildSystem:    cmake
 
@@ -37,7 +33,7 @@ BuildOption:    -DWITH_GCC_VISIBILITY=%{!?with_clang:ON}%{?with_clang:OFF}
 BuildRequires:	pkgconfig(tqt-mt)
 BuildRequires:	pkgconfig(tqt)
 BuildRequires:  tqt3-dev-tools
-BuildRequires:	trinity-tde-cmake >= %{tde_version}
+BuildRequires:	trinity-tde-cmake >= %{version}
 
 %{!?with_clang:BuildRequires:	gcc-c++}
 
@@ -98,7 +94,7 @@ See the dbus description for more information about D-BUS in general.
 %files -n %{devname}
 %defattr(-,root,root,-)
 %{_bindir}/dbusxml2qt3
-%{_includedir}/*.h
+%{_includedir}/%{tde_pkg}/*.h
 %{_libdir}/libdbus-1-tqt.so
 %{_libdir}/libdbus-1-tqt.la
 %{_libdir}/pkgconfig/*.pc
